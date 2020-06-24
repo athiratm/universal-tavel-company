@@ -1,0 +1,13 @@
+<h2 mat-dialog-title>Enter Number of Seats</h2>
+<mat-dialog-content >
+  <form role="form">
+ <mat-form-field appearance="fill">
+    <mat-label>Seat</mat-label>
+    <input type = "text" id = "seat" name = "seat" [(ngModel)]="seat" matInput>
+  </mat-form-field>
+</form>
+</mat-dialog-content>
+<mat-dialog-actions >
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="seat" cdkFocusInitial>Proceed</button>
+</mat-dialog-actions>

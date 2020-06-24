@@ -1,0 +1,67 @@
+
+<div class="row">
+<form role="form" (submit)="searchFlights()">
+
+    <br/>
+    <br/>
+     <mat-form-field appearance="fill">
+    <mat-label>Departure Airport</mat-label>
+    <input type ="text" id = "departureAirport" name = "departureAirport" [(ngModel)]="criteria.departureAirport" matInput>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Arrival Airport</mat-label>
+    <input type = "text" id = "arrivalAirport" name = "arrivalAirport" [(ngModel)]="criteria.arrivalAirport" matInput>
+  </mat-form-field>
+  <mat-form-field appearance="fill">
+    <mat-label>Choose a date</mat-label>
+    <input matInput [matDatepicker]="picker" name = "departureDate" [(ngModel)]="criteria.departureDate">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <button type = "submit" mat-raised-button color="primary">Search</button>
+
+
+</form>
+</div>
+
+
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+
+  <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+  <!-- Position Column -->
+  <ng-container matColumnDef="position">
+    <th mat-header-cell *matHeaderCellDef> No. </th>
+    <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+  </ng-container>
+
+  <!-- Name Column -->
+  <ng-container matColumnDef="operatingAirlines">
+    <th mat-header-cell *matHeaderCellDef> Operating Airline </th>
+    <td mat-cell *matCellDef="let element"> {{element.operatingAirlines}} </td>
+  </ng-container>
+
+  <!-- Weight Column -->
+  <ng-container matColumnDef="departureAirport">
+    <th mat-header-cell *matHeaderCellDef> Departure </th>
+    <td mat-cell *matCellDef="let element"> {{element.departureAirport}} </td>
+  </ng-container>
+
+  <!-- Symbol Column -->
+  <ng-container matColumnDef="arrivalAirport">
+    <th mat-header-cell *matHeaderCellDef> Arrival </th>
+    <td mat-cell *matCellDef="let element"> {{element.arrivalAirport}} </td>
+  </ng-container>
+  <ng-container matColumnDef="seats">
+    <th mat-header-cell *matHeaderCellDef> Seat </th>
+    <td mat-cell *matCellDef="let element"> {{element.seats}} </td>
+  </ng-container>
+  <ng-container matColumnDef="actionBook">
+    <th mat-header-cell *matHeaderCellDef> Action </th>
+    <td mat-cell *matCellDef="let element"> <button mat-raised-button (click)="showBookingDialog(element.flightNumber)" color="primary">Book Flight</button> </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+
